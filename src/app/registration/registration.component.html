@@ -1,0 +1,72 @@
+<html>
+<body>
+    <div class="container">
+    <h2>Inscription Utilisateur</h2>
+    <form (ngSubmit)="onSubmit()" class="registration-form">
+  <div>
+    <label>ID:</label>
+    <input type="text" [(ngModel)]="user.id" name="id" required >
+
+  </div>
+  <div>
+    
+    <label>Nom:</label>
+    <input type="text" [(ngModel)]="user.lastname" name="lastname" required maxlength="50">
+
+  </div>
+  <div>
+    <label>Prénom:</label>
+    <input type="text" [(ngModel)]="user.firstname" name="firstname" required maxlength="50">
+
+  </div>
+  <div>
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="user.email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+ </div>
+  
+  <div>
+    <label>Date de naissance:</label>
+    <input type="date" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
+
+  </div>
+  <div>
+    <label>Téléphone:</label>
+    <input type="text" [(ngModel)]="user.phone" name="phone" required  pattern="^(?:(?:\+|00)216)?[0-9]{8}$">
+
+  </div>
+  <div>
+    <label>Mot de passe :</label>
+    <input type="password" [(ngModel)]="user.password" name="password" required>
+   
+  </div>
+  <div>
+    <label>Adresse:</label>
+    <input type="text" [(ngModel)]="user.address" name="address" required>
+ 
+  </div>
+  <div>
+    <label>Rôle:</label>
+    <select [(ngModel)]="user.userRole" name="role" required>
+     
+      
+      <option value="PATIENT">Patient</option>
+      <option value="DOCTOR">Docteur</option>
+      <option value="SECRETARY">Secrétaire</option>
+    </select>
+  </div>
+  <button type="submit">S'inscrire</button>
+  <div class="registration-status" *ngIf="registrationStatus">
+    {{ registrationStatus }}
+   
+  </div>
+  <div>        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button></div>
+</form>
+</div>
+</body>
+</html>
+
+
+
+
+
+

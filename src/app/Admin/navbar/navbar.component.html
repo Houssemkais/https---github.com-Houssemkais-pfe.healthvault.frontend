@@ -1,0 +1,26 @@
+<div class="app" style="  display: flex; height: 100vh; overflow:scroll initial">
+  <CDBSidebar textColor="#ffffff" backgroundColor="#333333">
+    <CDBSidebarHeader [prefix]="icon">
+      <ng-template #icon>
+        <i class="fa fa-bars fa-large"></i>
+      </ng-template>
+      HEALTHVAULT
+    </CDBSidebarHeader>
+    <CDBSidebarContent>
+      <CDBSidebarMenu class="sidebar-content">
+        <CDBSidebarMenuItem link='/admin/usertable' icon="columns">
+          User Management
+        </CDBSidebarMenuItem>
+        <CDBSidebarMenuItem link='/admin/appointment' icon="table">
+          Appointment Management
+        </CDBSidebarMenuItem>
+        <CDBSidebarMenuItem link='/' icon="user">
+          Deconnexion
+        </CDBSidebarMenuItem>
+      </CDBSidebarMenu>
+    </CDBSidebarContent>
+  </CDBSidebar>
+</div>
+
+  
+  
