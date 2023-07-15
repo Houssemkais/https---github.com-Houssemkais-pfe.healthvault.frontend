@@ -48,6 +48,7 @@ import { CreateAppointmentComponent } from './Admin/Appointment/create-appointme
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UpdateAppointmentComponent } from './Admin/Appointment/update-appointment/update-appointment.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { AnaComponent } from './Admin/ana/ana.component';
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   useExisting: forwardRef(() => TokenHttpInterceptor),
@@ -84,6 +85,7 @@ export const MY_DATE_FORMAT = {
         AppointmenttableComponent,
         CreateAppointmentComponent,
         UpdateAppointmentComponent,
+        AnaComponent,
   
     
       
