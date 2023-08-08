@@ -34,9 +34,10 @@ export class UpdateuserComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    const momentDate = moment(date); // Conversion de la chaîne en objet Moment
-    return momentDate.format('DD-MM-YYYY');
+    const momentDate = moment(date); // Conversion de la date en objet Moment
+    return momentDate.format('YYYY-MM-DD');
   }
+
   ngOnInit(): void {
 
   }
@@ -57,6 +58,7 @@ export class UpdateuserComponent implements OnInit {
       phone: this.userForm.value.phone,
       sex: this.userForm.value.sexe,
       userRole: this.userForm.value.userRole,
+      commentaries:this.userForm.value.commentaries,
     };
   
     console.log(this.user);

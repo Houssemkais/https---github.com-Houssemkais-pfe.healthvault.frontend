@@ -9,6 +9,7 @@ import { UpdateuserComponent } from './Admin/User/updateuser/updateuser.componen
 
 import { UsertableComponent } from './Admin/usertable/usertable.component';
 import { AppointmenttableComponent } from './Admin/Appointment/appointmenttable/appointmenttable.component';
+import { AnalysisComponent } from './Admin/analysis/analysis.component';
 
 const routes: Routes = [{ path:'', component: LoginComponent },
 { path:'inscription', component: RegistrationComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [{ path:'', component: LoginComponent },
     { path: '', redirectTo: 'usertable', pathMatch: 'full' }, // Default route
     { path: 'usertable', component: UsertableComponent },
     { path: 'appointment', component: AppointmenttableComponent },
+    { path: 'analysis', component: AnalysisComponent },
   ]
 }
 ];

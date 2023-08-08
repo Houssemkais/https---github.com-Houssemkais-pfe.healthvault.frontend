@@ -21,7 +21,7 @@ export class UpdateAppointmentComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: Appointment,
   ) {
     this.appointment = { ...data };
-    this.date = new Date(this.appointment.date);
+    // this.date = new Date(this.appointment.date);
   }
 
   formatDate(date: Date): string {
@@ -41,10 +41,14 @@ export class UpdateAppointmentComponent implements OnInit {
       date: this.formatDate(this.date),
       reason: this.appointmentForm.value.reason,
       status: this.appointment.status,
+      startTime:this.appointment.startTime,
+      doctor_id:this.appointment.doctor.id
+    
+
     };
 
     this.appointmentControllerService
-      .update1({ id: this.appointment.id, body: updatedAppointment })
+      .update1({ id: this.appointment.id, body: updatedAppointment})
       .subscribe(
         (response: Appointment) => {
           this.dialogRef.close({ success: true });
@@ -59,7 +63,8 @@ export class UpdateAppointmentComponent implements OnInit {
     return (
       this.appointmentForm.valid &&
       this.appointmentForm.value.reason &&
-      this.appointmentForm.value.status
+      this.appointmentForm.value.status &&
+      this.appointmentForm.value.startTime
     );
 
 }}

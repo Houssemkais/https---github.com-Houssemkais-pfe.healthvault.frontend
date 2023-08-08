@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/api/models/user';
 import { UserControllerService } from 'src/api/services';
 import * as moment from 'moment';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -21,30 +22,32 @@ export class CreateuserComponent implements OnInit{
     id: 0,
     lastname: '',
     password: '',
+    commentaries:'',
     phone: '',
     sex: 'HOMME',
     userRole: 'ADMIN'
   };  errorMessage: string = '';
- 
+
   @ViewChild('userForm', { static: true })
   userForm!: NgForm;
   constructor(private userControllerService: UserControllerService,
     private router: Router,    private dialogRef: MatDialogRef<CreateuserComponent>) {
-  
-  
+
      }
    
-  ngOnInit() {
+  ngOnInit() {}
+    formatDate(date: string): string {
+      const momentDate = moment(date, 'YYYY-MM-DD'); // Conversion de la chaîne en objet Moment
+      return momentDate.format('YYYY-MM-DD');
+    }
   
-  }
 
-  formatDate(date: string): string {
-    const momentDate = moment(date, 'YYYY-MM-DD'); // Conversion de la chaîne en objet Moment
-    return momentDate.format('YYYY-MM-DD');
-  }
+
+  
   addUser() {
     if (!this.isFormValid()) {
       return;
+
     }
 
     const formattedDate = this.formatDate(this.user.dateOfBirth);

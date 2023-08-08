@@ -11,6 +11,8 @@
 .mat-column-patient,
 .mat-column-reason,
 .mat-column-status,
+.mat-column-startTime,
+.mat-column-endTime,
 .mat-column-date
  {
   width: 150px; 

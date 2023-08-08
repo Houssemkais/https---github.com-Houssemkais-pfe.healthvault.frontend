@@ -6,6 +6,7 @@ export interface User {
   accountNonLocked?: boolean;
   address: string;
   authorities?: Array<GrantedAuthority>;
+  commentaries?: string;
   createdAt?: string;
   credentialsNonExpired?: boolean;
   dateOfBirth: string;

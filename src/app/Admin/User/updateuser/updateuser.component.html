@@ -4,6 +4,7 @@
 <!-- Formulaire de mise à jour d'utilisateur -->
 <form (submit)="updateUser()" #userForm="ngForm">
   <!-- Ajoutez ici les champs de saisie pour les attributs de l'utilisateur -->
+  <label>Firstname</label><br>
   <div>
     <mat-form-field>
       <input matInput placeholder="Firstname" [(ngModel)]="user.firstname" name="firstname" required>
@@ -11,21 +12,21 @@
     <div *ngIf="userForm.controls['firstname']?.invalid && (userForm.controls['firstname']?.dirty || userForm.controls['firstname']?.touched)"
       class="error-message">Firstname is required.</div>
   </div>
-
+  <label>Lastname</label><br>
   <div>
     <mat-form-field>
       <input matInput placeholder="Lastname" [(ngModel)]="user.lastname" name="lastname" required>
     </mat-form-field>
     <div *ngIf="userForm.controls['lastname']?.invalid && (userForm.controls['lastname']?.dirty || userForm.controls['lastname']?.touched)" class="error-message">Lastname is required.</div>
   </div>
-
+  <label>Email</label><br>
   <div>
     <mat-form-field>
       <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" required email>
     </mat-form-field>
     <div *ngIf="userForm.controls['email']?.invalid && (userForm.controls['email']?.dirty || userForm.controls['email']?.touched)" class="error-message">Please enter a valid email address.</div>
   </div>
-
+  <label>Adresse</label><br>
   <div>
     <mat-form-field>
       <input matInput placeholder="Adresse" [(ngModel)]="user.address" name="address" required>
@@ -34,7 +35,7 @@
   </div>
   
   <div>
-  
+    <label>dateOfBirth</label><br>
     {{date}}
     <mat-form-field>
      
@@ -51,24 +52,24 @@
   
     <div *ngIf="userForm.controls['dateOfBirth']?.invalid && (userForm.controls['dateOfBirth']?.dirty || userForm.controls['dateOfBirth']?.touched)" class="error-message">dateOfBirth is required.</div>
   </div>
-  
+  <label>Password</label><br>
   <div>
     <mat-form-field>
-      <input matInput type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required minlength="8">
+      <input matInput type="password" placeholder="Password"  [(ngModel)]="user.password" name="password" required minlength="8">
     </mat-form-field>
     <div *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched)" class="error-message">
       Password is required and must be at least 8 characters long.
     </div>
   </div>
   
-  
+  <label>Phone</label><br>
   <div>
     <mat-form-field>
       <input matInput type="tel" placeholder="Phone" [(ngModel)]="user.phone" name="phone" required pattern="[0-9]{8}">
     </mat-form-field>
     <div *ngIf="userForm.controls['phone']?.invalid && (userForm.controls['phone']?.dirty || userForm.controls['phone']?.touched)" class="error-message">Please enter a valid Tunisian phone number (8 digits).</div>
   </div>
-  
+  <label>Sexe</label><br>
   <div>
     <mat-form-field>
       <mat-label>Sexe</mat-label>
@@ -79,6 +80,14 @@
     </mat-form-field>
     <div *ngIf="userForm.controls['sexe']?.invalid && (userForm.controls['sexe']?.dirty || userForm.controls['sexe']?.touched)" class="error-message">Sexe is required.</div>
   </div>
+  <label>Firstname</label><br>
+  <div>
+    <mat-form-field>
+      <textarea matInput placeholder="Commentaries" [(ngModel)]="user.commentaries" name="commentaries"></textarea>
+    </mat-form-field>
+    <!-- No validation required for commentaries field -->
+  </div>
+  <label>userRole</label><br>
   <div>
     <mat-form-field>
       <mat-label>User Role</mat-label>

@@ -1,87 +1,119 @@
-/* Style pour le formulaire d'inscription */
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-div {
-  margin-bottom: 10px;
-}
-
-label {
-  font-weight: bold;
-}
-
-input,
-select {
-  width: 300px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button[type="submit"] {
-  width: 200px;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-/* Styles supplémentaires pour améliorer l'apparence du formulaire */
-body {
-  font-family: Arial, sans-serif;
-  background-image: url('doctors.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
 
 .container {
-  max-width: 500px;
-  max-height: 500px;
-  margin: 0 auto;
+  width: 500px;
+  height: auto;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);}
+body {
+
+  /* width: 600px;
+    height: 700px; 
+    background-color: #f5f5f5;  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-image: url('doctors.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
   
+  /* Style du conteneur du formulaire */
+  form {
+   /* Largeur fixe du formulaire */
+   padding: 20px;
+   background-color: #fcfafa;
+   border-radius: 8px;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+   height: auto;
  
-}
-
-.registration-status {
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-button[type="button"] {
-  width: 200px;
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button[type="button"]:hover {
-  background-color: #0056b3;
-}
+  
+  }
+  
+  
+  
+  /* Style du titre */
+  h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  
+  /* Style des champs de saisie */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  /* Style des listes déroulantes */
+  mat-select {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  /* Style des boutons */
+  button[type="submit"] {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    margin-left: 120px;
+  
+  }
+  button[type="button"] {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    margin-left: 120px;
+  
+  }
+  .error-message {
+    color: red;
+  
+   
+  }
+  .aa {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    color: red;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0033cc;
+  }
+  
+  button[type="submit"]:focus {
+    outline: none;
+  }
+  
+  /* Style des messages d'erreur */
+  .mat-error {
+    color: red;
+  }
+  
+  /* Espacement entre les éléments */
+  .mat-form-field + .mat-form-field,
+  .mat-select + .mat-select {
+    margin-top: 20px;
+  }
+  

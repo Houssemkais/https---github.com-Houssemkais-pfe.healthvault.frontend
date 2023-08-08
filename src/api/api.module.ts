@@ -8,6 +8,7 @@ import { UserControllerService } from './services/user-controller.service';
 import { AppointmentControllerService } from './services/appointment-controller.service';
 import { JwtControllerService } from './services/jwt-controller.service';
 import { PasswordForgotControllerService } from './services/password-forgot-controller.service';
+import { PredictionControllerService } from './services/prediction-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -21,6 +22,7 @@ import { PasswordForgotControllerService } from './services/password-forgot-cont
     AppointmentControllerService,
     JwtControllerService,
     PasswordForgotControllerService,
+    PredictionControllerService,
     ApiConfiguration
   ],
 })

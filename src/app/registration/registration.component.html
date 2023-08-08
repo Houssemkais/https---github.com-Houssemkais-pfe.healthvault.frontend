@@ -1,72 +1,91 @@
-<html>
+
+
 <body>
-    <div class="container">
-    <h2>Inscription Utilisateur</h2>
-    <form (ngSubmit)="onSubmit()" class="registration-form">
-  <div>
-    <label>ID:</label>
-    <input type="text" [(ngModel)]="user.id" name="id" required >
-
-  </div>
-  <div>
+ 
+  <div class="container"> 
+    <h2>Registration</h2>
+  <!-- Formulaire d'ajout d'utilisateur -->
+  <form (submit)="addUser()" #userForm="ngForm">
+    <!-- Ajoutez ici les champs de saisie pour les attributs de l'utilisateur -->
+    <div>
+        <mat-form-field>
+          <input matInput placeholder="Firstname" [(ngModel)]="user.firstname" name="firstname" required>
+        </mat-form-field>
+        <div *ngIf="userForm.controls['firstname']?.invalid && (userForm.controls['firstname']?.dirty || userForm.controls['firstname']?.touched)" class="error-message">Firstname is required.</div>
+      </div>
+  
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Lastname" [(ngModel)]="user.lastname" name="lastname" required>
+      </mat-form-field>
+      <div *ngIf="userForm.controls['lastname']?.invalid && (userForm.controls['lastname']?.dirty || userForm.controls['lastname']?.touched)" class="error-message">Lastname is required.</div>
+    </div>
+  
+ 
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" required email #emailInput="ngModel">
+      <mat-error *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+        <div *ngIf="emailInput.errors?.['required']">Please enter an email address.</div>
+        <div *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</div>
+      </mat-error>
+    </mat-form-field>
+    <div class="error-message" *ngIf="errorMessage !== undefined">{{ errorMessage }}</div>
+    <div>
+      
+      <mat-form-field>
+        <input matInput placeholder="Adresse" [(ngModel)]="user.address" name="address" required>
+      </mat-form-field>
+      <div *ngIf="userForm.controls['address']?.invalid && (userForm.controls['address']?.dirty || userForm.controls['address']?.touched)" class="error-message">Addresse is required.</div>
+    </div>
     
-    <label>Nom:</label>
-    <input type="text" [(ngModel)]="user.lastname" name="lastname" required maxlength="50">
+    <div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date of Birth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="userForm.controls['dateOfBirth']?.invalid && (userForm.controls['dateOfBirth']?.dirty || userForm.controls['dateOfBirth']?.touched)" class="error-message">dateOfBirth is required.</div>
+    </div>
+    
+    <div>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required minlength="8">
+      </mat-form-field>
+      <div *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched)" class="error-message">
+        Password is required and must be at least 8 characters long.
+      </div>
+    </div>
+    
+    
+    <div>
+      <mat-form-field>
+        <input matInput type="tel" placeholder="Phone" [(ngModel)]="user.phone" name="phone" required pattern="[0-9]{8}">
+      </mat-form-field>
+      <div *ngIf="userForm.controls['phone']?.invalid && (userForm.controls['phone']?.dirty || userForm.controls['phone']?.touched)" class="error-message">Please enter a valid Tunisian phone number (8 digits).</div>
+    </div>
+    
+    <div>
+      <mat-form-field>
+        <mat-label>Sexe</mat-label>
+        <mat-select placeholder="Select Sexe" [(ngModel)]="user.sex" name="sexe" required>
+          <mat-option value="HOMME">Homme</mat-option>
+          <mat-option value="FEMME">Femme</mat-option>
 
-  </div>
-  <div>
-    <label>Prénom:</label>
-    <input type="text" [(ngModel)]="user.firstname" name="firstname" required maxlength="50">
+          
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="userForm.controls['sexe']?.invalid && (userForm.controls['sexe']?.dirty || userForm.controls['sexe']?.touched)" class="error-message">Sexe is required.</div>
+    </div>
 
-  </div>
-  <div>
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="user.email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
- </div>
+    <!-- Ajoutez d'autres champs ici... -->
+  
+    <button mat-raised-button color="primary" type="submit">Add</button>
+ 
   
   <div>
-    <label>Date de naissance:</label>
-    <input type="date" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
-
+    <button mat-raised-button type="button" (click)="goToLoginPage()">Cancel</button>
   </div>
-  <div>
-    <label>Téléphone:</label>
-    <input type="text" [(ngModel)]="user.phone" name="phone" required  pattern="^(?:(?:\+|00)216)?[0-9]{8}$">
-
-  </div>
-  <div>
-    <label>Mot de passe :</label>
-    <input type="password" [(ngModel)]="user.password" name="password" required>
-   
-  </div>
-  <div>
-    <label>Adresse:</label>
-    <input type="text" [(ngModel)]="user.address" name="address" required>
- 
-  </div>
-  <div>
-    <label>Rôle:</label>
-    <select [(ngModel)]="user.userRole" name="role" required>
-     
-      
-      <option value="PATIENT">Patient</option>
-      <option value="DOCTOR">Docteur</option>
-      <option value="SECRETARY">Secrétaire</option>
-    </select>
-  </div>
-  <button type="submit">S'inscrire</button>
-  <div class="registration-status" *ngIf="registrationStatus">
-    {{ registrationStatus }}
-   
-  </div>
-  <div>        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button></div>
-</form>
+  
+  </form>
 </div>
 </body>
-</html>
-
-
-
-
-
-

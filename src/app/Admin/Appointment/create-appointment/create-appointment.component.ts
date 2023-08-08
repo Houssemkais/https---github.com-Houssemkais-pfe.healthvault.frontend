@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { Appointment,AppointmentCreateModel,Doctor, Patient } from 'src/api/models';
-import { AppointmentControllerService } from 'src/api/services';
+import { Appointment,AppointmentCreateModel, Doctor, LocalTime, Patient, User} from 'src/api/models';
+import { AppointmentControllerService, UserControllerService } from 'src/api/services';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-create-appointment',
@@ -16,22 +17,35 @@ export class CreateAppointmentComponent implements OnInit {
 
   appointmentCreratemodel: AppointmentCreateModel = {
     date: '',
-    doctor_id:0 ,
-   
-    patient_id:0 ,
+    doctor_id: 0,
+
+    patient_id: 0,
     reason: '',
-    status: 'EN_COURS'
-  }; errorMessage: string = '';
+    status: 'EN_COURS',
+ 
+    startTime: {},
+  }; 
+    errorMessage: string = '';
+    patients: (User | Patient)[] = [];
+  doctors: (User | Doctor)[] = [];
   @ViewChild('appointmentForm', { static: true })
   appointmentForm!: NgForm;
 
   constructor(
     private appointmentControllerService: AppointmentControllerService,
     private router: Router,
-    private dialogRef: MatDialogRef<CreateAppointmentComponent>,private snackBar: MatSnackBar
+    private dialogRef: MatDialogRef<CreateAppointmentComponent>,private snackBar: MatSnackBar, private userService: UserControllerService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPatientsAndDoctors();
+  }
+  fetchPatientsAndDoctors() {
+    this.userService.findAll().subscribe((users) => {
+      this.patients = users.filter((user) => user.userRole === 'PATIENT');
+      this.doctors = users.filter((user) => user.userRole === 'DOCTOR');
+    });
+  }
   formatDate(date: string): string {
     const momentDate = moment(date, 'YYYY-MM-DD'); // Conversion de la chaîne en objet Moment
     return momentDate.format('YYYY-MM-DD');
@@ -43,7 +57,7 @@ export class CreateAppointmentComponent implements OnInit {
 
 
     const formattedDate = this.formatDate(this.appointmentCreratemodel.date);
-    this.appointmentCreratemodel.date = formattedDate;
+     this.appointmentCreratemodel.date = formattedDate;
 
     this.appointmentControllerService.create2({ body: this.appointmentCreratemodel }).subscribe(
       () => {
@@ -71,6 +85,7 @@ export class CreateAppointmentComponent implements OnInit {
       this.appointmentForm.value.doctor_id &&
       this.appointmentForm.value.patient_id &&
       this.appointmentForm.value.reason&&
+      this.appointmentForm.value.startTime&&
       this.appointmentForm.value.status
     );
   }

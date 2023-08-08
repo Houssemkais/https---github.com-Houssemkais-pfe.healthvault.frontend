@@ -18,7 +18,7 @@ export class AppointmenttableComponent {
   searchValue: string = '';
   public AppointmentDataSource: MatTableDataSource<(Appointment)> = new MatTableDataSource();
 
-  public displayedColumns: string[] = ['id','patient', 'doctor','reason','status','date','actions'];
+  public displayedColumns: string[] = ['id','patient', 'doctor','reason','status','date','startTime','endTime','actions'];
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -87,8 +87,11 @@ export class AppointmenttableComponent {
         // Assign the appointment's reason
         status: 'ANNULE' // Set the status to 'CANCELLED'
         ,
-        date: appointment.date, // Assign the appointment's date
-      reason: appointment.reason,
+
+        date: appointment.date,
+        reason: appointment.reason,
+        startTime: appointment.startTime,
+        doctor_id:appointment.doctor.id
       };
   
       this.appointmentControllerService
