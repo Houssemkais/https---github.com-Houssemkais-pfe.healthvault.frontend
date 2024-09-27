@@ -9,12 +9,12 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { PasswordForgotDto } from '../models/password-forgot-dto';
+import { PatientData } from '../models/patient-data';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PasswordForgotControllerService extends BaseService {
+export class PredictionControllerService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -23,55 +23,55 @@ export class PasswordForgotControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation processForgotPasswordForm
+   * Path part for operation predictPatientData
    */
-  static readonly ProcessForgotPasswordFormPath = '/forgot-password';
+  static readonly PredictPatientDataPath = '/api/predict';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `processForgotPasswordForm()` instead.
+   * To access only the response body, use `predictPatientData()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  processForgotPasswordForm$Response(params: {
-    body: PasswordForgotDto
+  predictPatientData$Response(params: {
+    body: PatientData
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<Array<number>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, PasswordForgotControllerService.ProcessForgotPasswordFormPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, PredictionControllerService.PredictPatientDataPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<number>>;
       })
     );
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `processForgotPasswordForm$Response()` instead.
+   * To access the full response (for headers, for example), `predictPatientData$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  processForgotPasswordForm(params: {
-    body: PasswordForgotDto
+  predictPatientData(params: {
+    body: PatientData
   },
   context?: HttpContext
 
-): Observable<void> {
+): Observable<Array<number>> {
 
-    return this.processForgotPasswordForm$Response(params,context).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.predictPatientData$Response(params,context).pipe(
+      map((r: StrictHttpResponse<Array<number>>) => r.body as Array<number>)
     );
   }
 

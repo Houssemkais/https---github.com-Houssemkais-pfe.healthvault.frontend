@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PasswordResetService } from './PasswordResetService';
+
+import { PasswordForgotControllerService } from 'src/api/services';
+import { PasswordForgotDto } from 'src/api/models';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,14 +11,29 @@ import { PasswordResetService } from './PasswordResetService';
 })
 export class ForgotPasswordComponent {
   email:string = '';
-  resetPassword(){
-    this.passwordResetService.requestPasswordReset(this.email)
-    .subscribe(() => {
-      console.log('Demande de réinitialisation de mot de passe soumise avec succès.');
-      // Ajoutez ici votre logique de redirection ou d'affichage de messages à l'utilisateur
-    });
-  }
+  constructor(
+    private passwordResetService:PasswordForgotControllerService ,
+    private router: Router
+  ) {}
 
-  constructor(private passwordResetService: PasswordResetService) { }
+  resetPassword(): void {
+    const passwordForgotDto: PasswordForgotDto = {
+      email: this.email
+    };
+
+    this.passwordResetService.processForgotPasswordForm({ body: passwordForgotDto }).subscribe(
+      () => {
+        // Password reset request successful
+        // You can perform any necessary actions here, such as displaying a success message
+        // and redirecting the user to a confirmation page
+        this.router.navigate(['/password-reset-success']);
+      },
+      (error) => {
+        // Handle error responses from the server
+        // You can display an error message or perform any necessary actions
+        console.error('An error occurred:', error);
+      }
+    );
+  }
 
 }

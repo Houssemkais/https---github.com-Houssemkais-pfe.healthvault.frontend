@@ -43,7 +43,7 @@
     </mat-form-field>
     <div *ngIf="userForm.controls['address']?.invalid && (userForm.controls['address']?.dirty || userForm.controls['address']?.touched)" class="error-message">Addresse is required.</div>
   </div>
-  
+
   <div>
     <mat-form-field>
       <input matInput [matDatepicker]="picker" placeholder="Date of Birth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
@@ -79,6 +79,12 @@
       </mat-select>
     </mat-form-field>
     <div *ngIf="userForm.controls['sexe']?.invalid && (userForm.controls['sexe']?.dirty || userForm.controls['sexe']?.touched)" class="error-message">Sexe is required.</div>
+  </div>
+  <div>
+    <mat-form-field>
+      <textarea matInput placeholder="Commentaries" [(ngModel)]="user.commentaries" name="commentaries"></textarea>
+    </mat-form-field>
+    <!-- No validation required for commentaries field -->
   </div>
   <div>
     <mat-form-field>

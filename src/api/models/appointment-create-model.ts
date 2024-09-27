@@ -1,9 +1,13 @@
 /* tslint:disable */
 /* eslint-disable */
+import { LocalTime } from './local-time';
 export interface AppointmentCreateModel {
+  available?: boolean;
   date: string;
   doctor_id: number;
+  endTime?: LocalTime;
   patient_id: number;
   reason: string;
-  status: 'PLANIFIE' | 'EN_COURS' | 'TERMINE' | 'ANNULE';
+  startTime: LocalTime;
+  status: 'EN_COURS' | 'ANNULE';
 }

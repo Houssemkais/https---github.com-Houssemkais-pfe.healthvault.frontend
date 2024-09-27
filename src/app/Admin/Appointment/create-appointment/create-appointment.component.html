@@ -1,0 +1,67 @@
+<body>
+    <h2>Add Appointment</h2>
+    
+    <!-- Formulaire d'ajout d'utilisateur -->
+    <form (submit)="addAppointment()" #appointmentForm="ngForm">
+
+<div>
+  <mat-form-field>
+    <mat-label>Select Patient</mat-label>
+    <mat-select [(ngModel)]="appointmentCreratemodel.patient_id" name="patient_id" required>
+      <mat-option *ngFor="let patient of patients" [value]="patient.id">
+        {{ patient.firstname }} {{ patient.lastname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="appointmentForm.controls['patient_id']?.invalid && (appointmentForm.controls['patient_id']?.dirty || appointmentForm.controls['patient_id']?.touched)" class="error-message">Patient is required.</div>
+</div>
+
+<!-- Dropdown for selecting a doctor -->
+<div>
+  <mat-form-field>
+    <mat-label>Select Doctor</mat-label>
+    <mat-select [(ngModel)]="appointmentCreratemodel.doctor_id" name="doctor_id" required>
+      <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+        {{ doctor.firstname }} {{ doctor.lastname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="appointmentForm.controls['doctor_id']?.invalid && (appointmentForm.controls['doctor_id']?.dirty || appointmentForm.controls['doctor_id']?.touched)" class="error-message">Doctor is required.</div>
+</div>
+
+<!-- ... existing form fields ... -->
+
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="reason" [(ngModel)]="appointmentCreratemodel.reason" name="reason" required>
+        </mat-form-field>
+        <div *ngIf="appointmentForm.controls['reason']?.invalid && (appointmentForm.controls['reason']?.dirty || appointmentForm.controls['reason']?.touched)" class="error-message">Reason is required.</div>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date of Appointment" [(ngModel)]="appointmentCreratemodel.date" name="date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        </mat-form-field>
+        
+        <mat-datepicker #picker></mat-datepicker>
+        
+        <div *ngIf="appointmentForm.controls['date']?.invalid && (appointmentForm.controls['date']?.dirty || appointmentForm.controls['date']?.touched)" class="error-message">Date is required.</div>
+      </div>
+      
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Input type time</mat-label>
+          <input type="time" matInput name="startTime" min="09:00" max="18:00" [(ngModel)]="appointmentCreratemodel.startTime" />
+        </mat-form-field>
+        <div *ngIf="appointmentForm.controls['startTime']?.invalid && (appointmentForm.controls['startTime']?.dirty || appointmentForm.controls['startTime']?.touched)" class="error-message">Start Time is required.</div>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="status" [(ngModel)]="appointmentCreratemodel.status" name="status" required>
+        </mat-form-field>
+        <div *ngIf="appointmentForm.controls['status']?.invalid && (appointmentForm.controls['status']?.dirty || appointmentForm.controls['status']?.touched)" class="error-message">Please enter a valid Tunisian phone number (8 digits).</div>
+      </div>
+      <!-- Ajoutez d'autres champs ici... -->
+      <button mat-raised-button color="primary" type="submit">Add</button>
+    </form>
+    </body>

@@ -1,0 +1,67 @@
+<body>
+    <div>
+        <h2>Diabetes Prediction</h2> <div class="c">
+        <form (ngSubmit)="predict()" #predictionForm="ngForm">
+        
+        
+            <div>   
+              <mat-form-field>
+                <input type="number" matInput placeholder="age" [(ngModel)]="patientData.age" name="age" required>
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['age']?.invalid && (predictionForm.controls['age']?.dirty || predictionForm.controls['age']?.touched)" class="error-message">champ is required.</div>
+            </div>
+          
+            <div>  
+              <mat-form-field>
+                <input type="number" matInput placeholder="glucose" [(ngModel)]="patientData.glucose" name="glucose" required>
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['glucose']?.invalid && (predictionForm.controls['glucose']?.dirty || predictionForm.controls['glucose']?.touched)" class="error-message">champ is required.</div>
+            </div>
+          
+            <div>  
+              <mat-form-field>
+                <input  type="number"matInput placeholder="bloodPressure" [(ngModel)]="patientData.bloodPressure" name="bloodPressure" required>
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['bloodPressure']?.invalid && (predictionForm.controls['bloodPressure']?.dirty || predictionForm.controls['bloodPressure']?.touched)" class="error-message">champ is required.</div>
+            </div>
+         
+            <div>
+              <mat-form-field>
+                <input type="number" matInput placeholder="bmi" [(ngModel)]="patientData.bmi" name="bmi" required>
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['bmi']?.invalid && (predictionForm.controls['bmi']?.dirty || predictionForm.controls['bmi']?.touched)" class="error-message">champ is required.</div>
+            </div>
+     
+            <div>
+              <mat-form-field>
+                <input type="number" matInput placeholder="diabetesPedigreeFunction" [(ngModel)]="patientData.diabetesPedigreeFunction" name="diabetesPedigreeFunction" required >
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['diabetesPedigreeFunction']?.invalid && (predictionForm.controls['diabetesPedigreeFunction']?.dirty || predictionForm.controls['adiabetesPedigreeFunctionge']?.touched)" class="error-message">champ is required.</div>
+            </div>
+           
+            <div>
+              <mat-form-field>
+                <input type="number"matInput placeholder="pregnancies" [(ngModel)]="patientData.pregnancies" name="pregnancies" required>
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['pregnancies']?.invalid && (predictionForm.controls['pregnancies']?.dirty || predictionForm.controls['pregnancies']?.touched)" class="error-message">champ is required.</div>
+            </div>
+            
+            <div>
+              <mat-form-field>
+                <input type="number" matInput placeholder="skinThickness" [(ngModel)]="patientData.skinThickness" name="skinThickness" required>
+              </mat-form-field>
+              <div *ngIf="predictionForm.controls['skinThickness']?.invalid && (predictionForm.controls['skinThickness']?.dirty || predictionForm.controls['skinThickness']?.touched)" class="error-message">champ is required.</div>
+            </div>
+
+         
+          <button type="submit" class="btn btn-primary">Predict</button>
+      
+        </form>   </div>
+        <div class="result-dialog" *ngIf="predictionResult !== null">
+          <h3>Prediction Result:</h3>
+          <p *ngIf="predictionResult === 1" class="alert-diabetes">The patient has diabetes.</p>
+          <p *ngIf="predictionResult === 0" class="alert-healthy">The patient is healthy.</p>
+        </div>
+      </div>
+      
+</body>
